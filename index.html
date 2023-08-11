@@ -38,6 +38,19 @@
           );
         };
 
+        const AddForm = () => {
+          const [title, setTitle] = React.useState('');
+            return (
+              <form>
+                <input 
+                type="text" 
+                value={title}
+                />
+                <button>Add</button>
+              </form>
+            );
+        };
+          
         //親Component
         const App = () => {
           const [allTodo, setAllTodos] = React.useState([
@@ -87,10 +100,7 @@
                 <button id="purge">Purge</button>
               </h1>
               <ul id="todos">{todoItems}</ul>
-              <form id="add-form">
-                <input type="text" />
-                <button>Add</button>
-              </form>
+              <AddForm />
             </>
           );
         };
