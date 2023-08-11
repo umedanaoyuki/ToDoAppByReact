@@ -24,7 +24,7 @@
           return (
             <li>
               <label>
-                <input type="checkbox" />
+                <input type="checkbox" checked={props.todo.isCompleted}/>
                 <span>{props.todo.title}</span>
               </label>
               <button onClick={handleDeleteClick}>Del</button>
