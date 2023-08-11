@@ -21,10 +21,16 @@
             props.onDeleteClick(props.todo.id);
           };
 
+          const handleCheckboxChange = () => {
+            props.onChangeCheckedBox(props.todo.id);
+          };
+            
           return (
             <li>
               <label>
-                <input type="checkbox" checked={props.todo.isCompleted}/>
+                <input type="checkbox" 
+                checked={props.todo.isCompleted}
+                onChange={handleCheckboxChange}/>
                 <span>{props.todo.title}</span>
               </label>
               <button onClick={handleDeleteClick}>Del</button>
@@ -39,6 +45,18 @@
             { id: 1, title: "bbb", isCompleted: true },
             { id: 2, title: "ccc", isCompleted: false },
           ]);
+
+          const handleTodCheckboxChanged = (id) => {
+            const newTools = allTodo.map((todo) => {
+                return {
+                  id: todo.id,
+                  title: todo.title,
+                  isCompleted: id === todo.id ? !todo.isCompleted : todo.isCompleted
+                };
+            });
+            setAllTodos(newTools);
+          };            
+
 
           const handleTodoDeleteClick = (id) => {
             if (!confirm("本当に削除しますか？")) {
@@ -57,6 +75,7 @@
                 key={todo.id}
                 todo={todo}
                 onDeleteClick={handleTodoDeleteClick}
+                onChangeCheckedBox={handleTodCheckboxChanged}
               />
             );
           });
