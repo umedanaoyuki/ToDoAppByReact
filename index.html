@@ -40,12 +40,17 @@
 
         const AddForm = () => {
           const [title, setTitle] = React.useState('');
+
+          const handleTextChange = (e) => {
+              setTitle(e.currentTarget.value);
+          };
+
             return (
               <form>
                 <input 
                 type="text" 
                 value={title}
-                />
+                onChange={handleTextChange}/>
                 <button>Add</button>
               </form>
             );
