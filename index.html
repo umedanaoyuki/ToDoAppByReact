@@ -16,23 +16,39 @@
       "use strict";
       {
 
-        const Todo = () => {
+        //子Component
+        const Todo = (props) => {
           return (
-
-            <li>
+                <li>
                   <label>
                     <input type="checkbox" />
                     <span>
-                      aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa
-                      aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa aaa
+                      {props.todo.title}
                     </span>
                   </label>
                   <button>Del</button>
                 </li>
-
           );
         };
+
+        //親Component
         const App = () => {
+          const todos = [
+            {id: 0, title: 'aaa', isCompleted: false},
+            {id: 1, title: 'bbb', isCompleted: true},
+            {id: 2, title: 'ccc', isCompleted: false},
+          ];
+
+          const todoItems = todos.map((todo) => {
+            return(
+              <Todo 
+                key={todo.id}
+                todo={todo}
+              />
+            );
+          });
+
+
           return (
             <>
               <h1>
@@ -40,8 +56,7 @@
                 <button id="purge">Purge</button>
               </h1>
               <ul id="todos">
-                <Todo />
-                <Todo />
+                {todoItems}
               </ul>
               <form id="add-form">
                 <input type="text" />
@@ -49,8 +64,8 @@
               </form>
             </>
           );
-        };
-        const root = ReactDOM.createRoot(document.querySelector("#root"));
+            };
+        const root = ReactDOM.createRoot(document.querySelector('#root'));
         root.render(<App />);
       }
     </script>
