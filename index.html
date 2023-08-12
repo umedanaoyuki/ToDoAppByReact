@@ -40,6 +40,7 @@
 
         const AddForm = (props) => {
           const [title, setTitle] = React.useState('');
+
           const inputRef = React.useRef(null);
 
           const handleTextChange = (e) => {
@@ -73,6 +74,17 @@
             // { id: 1, title: "bbb", isCompleted: true },
             // { id: 2, title: "ccc", isCompleted: false },
           ]);
+
+
+          React.useEffect(() => {
+            let savedTodos;
+            if (localStorage.getItem('allTodo') === null){
+              savedTodos = []; } else {
+                savedTodos = JSON.parse(localStorage.getItem('allTodo'));
+              } 
+              setAllTodos(savedTodos);
+          }, []);
+
 
           const updateTodos = (newTodos) => {
             setAllTodos(newTodos);
