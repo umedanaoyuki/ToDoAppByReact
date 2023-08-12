@@ -45,7 +45,8 @@
               setTitle(e.currentTarget.value);
           };
 
-          const handleSumbit = () => {
+          const handleSumbit = (e) => {
+            e.preventDefault();
             props.handleAddFormSubmit(title);
           };
 
