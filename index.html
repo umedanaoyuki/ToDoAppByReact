@@ -38,19 +38,24 @@
           );
         };
 
-        const AddForm = () => {
+        const AddForm = (props) => {
           const [title, setTitle] = React.useState('');
 
           const handleTextChange = (e) => {
               setTitle(e.currentTarget.value);
           };
 
+          const handleSumbit = () => {
+            props.handleAddFormSubmit(title);
+          };
+
             return (
-              <form>
+              <form onSubmit={handleSumbit}>
                 <input 
                 type="text" 
                 value={title}
-                onChange={handleTextChange}/>
+                onChange={handleTextChange}
+                />
                 <button>Add</button>
               </form>
             );
@@ -63,6 +68,16 @@
             { id: 1, title: "bbb", isCompleted: true },
             { id: 2, title: "ccc", isCompleted: false },
           ]);
+
+          const handleAddFormSubmit = (title) => {
+              const newTodos = [...allTodo];
+              newTodos.push({
+                id: Date.now(),
+                title: title,
+                isCompleted: false,
+              });
+              setAllTodos(newTodos);
+          };
 
           const handleTodCheckboxChanged = (id) => {
             const newTools = allTodo.map((todo) => {
@@ -105,7 +120,8 @@
                 <button id="purge">Purge</button>
               </h1>
               <ul id="todos">{todoItems}</ul>
-              <AddForm />
+              <AddForm handleAddFormSubmit={handleAddFormSubmit}
+              />
             </>
           );
         };
