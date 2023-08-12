@@ -69,10 +69,17 @@
         //親Component
         const App = () => {
           const [allTodo, setAllTodos] = React.useState([
-            { id: 0, title: "aaa", isCompleted: false },
-            { id: 1, title: "bbb", isCompleted: true },
-            { id: 2, title: "ccc", isCompleted: false },
+            // { id: 0, title: "aaa", isCompleted: false },
+            // { id: 1, title: "bbb", isCompleted: true },
+            // { id: 2, title: "ccc", isCompleted: false },
           ]);
+
+          const updateTodos = (newTodos) => {
+            setAllTodos(newTodos);
+            localStorage.setItem('allTodo', JSON.stringify(newTodos));
+          };
+
+
 
           const handlePurgeClick = () => {
 
@@ -83,7 +90,7 @@
             const newTodos = allTodo.filter((todo) => {
                 return todo.isCompleted === false;
             });
-            setAllTodos(newTodos);
+            updateTodos(newTodos);
           };
             
 
@@ -95,7 +102,7 @@
                 title: title,
                 isCompleted: false,
               });
-              setAllTodos(newTodos);
+              updateTodos(newTodos);
           };
 
           const handleTodCheckboxChanged = (id) => {
@@ -107,7 +114,7 @@
                   isCompleted: id === todo.id ? !todo.isCompleted : todo.isCompleted
                 };
             });
-            setAllTodos(newTools);
+            updateTodos(newTools);
           };            
 
 
@@ -119,7 +126,7 @@
             const newTodos = allTodo.filter((todo) => {
               return todo.id !== id;
             });
-            setAllTodos(newTodos);
+            updateTodos(newTodos);
           };
 
           const todoItems = allTodo.map((todo) => {
